@@ -18,7 +18,7 @@ function moviesAverageOfDirector(array, director) {
   
   const buscarDirector = array.filter((item) => item.director === director);
   const buscarScore= buscarDirector.map((item) => item.score);
-  const result = buscarScore.reduce((acumulador, valorActual) => acumulador + valorActual);
+  const result = buscarScore.reduce((acumulador, valorActual) =>  acumulador +  parseFloat(valorActual)).toFixed(2);
   const resultFinal = (result / buscarScore.length);
   console.log("EXERCICE 3 ->", resultFinal);
   return resultFinal;
@@ -36,25 +36,24 @@ function orderAlphabetically(array) {
 
 // Exercise 5: Order by year, ascending
 function orderByYear() {
-  
-  const movies = [];
-  const arrayMovies = movies.map(({title, year}) => ({title, year}));
- 
-  const ordenarYear = arrayMovies.sort((a, b) => {
-      if (a.year > b.year) {
-        return -1;
-      }
+
+  const movies = require("./data");
+  const ordenarYear = movies.sort((a, b) => {
       if (a.year < b.year) {
-        return 1;
-      }
-      if (a.title < b.title) {
         return -1;
       }
-      if (a.title > b.title) {
+      if (a.year > b.year) {
         return 1;
-        }
+      }
+      if (a.title.toLowerCase() < b.title.toLowerCase()) {
+        return -1;
+      }
+      if (a.title.toLowerCase() > b.title.toLowerCase()) {
+        return 1;
+      }
     return 0;
   });
+   
   console.log("EXERCICE -> 5", ordenarYear);
   return ordenarYear;
 }
@@ -62,8 +61,15 @@ function orderByYear() {
 // Exercise 6: Calculate the average of the movies in a category
 function moviesAverageByCategory() {
   
-  const movies = [];
-  const generoMovies = movies.map(() => {});
+  const movies = require("./data");
+  const buscaMovies = movies.map(({genre, score}) => ({genre, score}));
+  const buscarGenre = buscaMovies.filter((item) => item.genre === "Drama");
+  const buscaScore = buscarGenre.map((item) => item.score);
+  const result = buscaScore.reduce((acumulador, valorActual) => acumulador + parseFloat(valorActual)).toFixed(2);
+  const resultFinal = (result / buscaScore.length).toFixed(2);
+  console.log("EXERCICE 6 ->" , resultFinal);
+  return resultFinal;
+
 }
 
 // Exercise 7: Modify the duration of movies to minutes
