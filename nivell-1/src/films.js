@@ -62,14 +62,13 @@ function orderByYear() {
 function moviesAverageByCategory() {
   
   const movies = require("./data");
-  const buscaMovies = movies.map(({genre, score}) => ({genre, score}));
-  const buscarGenre = buscaMovies.filter((item) => item.genre === "Drama");
+  const busca = movies.map((item) => (item));
+  const buscarGenre = busca.filter((item) => item.genre == "Drama");
   const buscaScore = buscarGenre.map((item) => item.score);
   const result = buscaScore.reduce((acumulador, valorActual) => acumulador + parseFloat(valorActual)).toFixed(2);
   const resultFinal = (result / buscaScore.length).toFixed(2);
   console.log("EXERCICE 6 ->" , resultFinal);
   return resultFinal;
-
 }
 
 // Exercise 7: Modify the duration of movies to minutes
